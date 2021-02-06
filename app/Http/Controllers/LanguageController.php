@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Session;
 use File;
-use App\Language;
+use App\Models\Language;
 use App\Translation;
 
 class LanguageController extends Controller
@@ -14,7 +14,7 @@ class LanguageController extends Controller
     {
     	$request->session()->put('locale', $request->locale);
         $language = Language::where('code', $request->locale)->first();
-    	flash(translate('Language changed to ').$language->name)->success();
+    	// flash(translate('Language changed to ').$language->name)->success();
     }
 
     public function index(Request $request)
@@ -35,11 +35,11 @@ class LanguageController extends Controller
         $language->code = $request->code;
         if($language->save()){
 
-            flash(translate('Language has been inserted successfully'))->success();
+            // flash(translate('Language has been inserted successfully'))->success();
             return redirect()->route('languages.index');
         }
         else{
-            flash(translate('Something went wrong'))->error();
+            // flash(translate('Something went wrong'))->error();
             return back();
         }
     }
@@ -69,11 +69,11 @@ class LanguageController extends Controller
         $language->name = $request->name;
         $language->code = $request->code;
         if($language->save()){
-            flash(translate('Language has been updated successfully'))->success();
+            // flash(translate('Language has been updated successfully'))->success();
             return redirect()->route('languages.index');
         }
         else{
-            flash(translate('Something went wrong'))->error();
+            // flash(translate('Something went wrong'))->error();
             return back();
         }
     }
@@ -95,9 +95,9 @@ class LanguageController extends Controller
                 $translation_def->save();
             }
         }
-        flash(translate('Translations updated for ').$language->name)->success();
+        // flash(translate('Translations updated for ').$language->name)->success();
         return back();
-    }
+               }
 
     public function update_rtl_status(Request $request)
     {
@@ -114,11 +114,11 @@ class LanguageController extends Controller
     {
         $language = Language::findOrFail($id);
         if (env('DEFAULT_LANGUAGE') == $language->code) {
-            flash(translate('Default language can not be deleted'))->error();
+            // flash(translate('Default language can not be deleted'))->error();
         }
         else {
             Language::destroy($id);
-            flash(translate('Language has been deleted successfully'))->success();
+            // flash(translate('Language has been deleted successfully'))->success();
         }
         return redirect()->route('languages.index');
     }

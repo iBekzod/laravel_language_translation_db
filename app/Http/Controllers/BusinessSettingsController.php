@@ -194,11 +194,11 @@ class BusinessSettingsController extends Controller
      */
     public function env_key_update(Request $request)
     {
-        foreach ($request->types as $key => $type) {
-                $this->overWriteEnvFile($type, $request[$type]);
-        }
+        // foreach ($request->types as $key => $type) {
+        //         $this->overWriteEnvFile($type, $request[$type]);
+        // }
 
-        flash(translate("Settings updated successfully"))->success();
+        // flash(translate("Settings updated successfully"))->success();
         return back();
     }
 
